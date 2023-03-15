@@ -21,12 +21,12 @@ return new class extends Migration
             $table->string('telp_number')->unique();
             $table->string('password');
             $table->enum('role',['admin', 'user']);
-            $table->unsignedBigInteger('media_id');
+            $table->unsignedBigInteger('media_id')->nullable();
             $table->timestamps();
             $table->rememberToken();
 
             $table->foreign('media_id')->references('id')->on('media')->onDelete('cascade');
- 
+
     });
 }
 
