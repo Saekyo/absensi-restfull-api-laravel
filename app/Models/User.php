@@ -19,8 +19,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'gender',
         'email',
+        'telp_number',
         'password',
+        'role'
     ];
 
     /**
@@ -41,4 +44,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the mediases for the blog post.
+     */
+
+     public function media(): BelongsTo
+    {
+        return $this->belongsTo(Media::class);
+    }
 }
