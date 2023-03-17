@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnnouncementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +18,22 @@ use App\Http\Controllers\UserController;
 */
 
 Route::post('/login', [AuthenticationController::class, 'login']);
+Route::post('/register', [AuthenticationController::class, 'signup']);
 
 
 
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::post('/register', [AuthenticationController::class, 'signup'])->middleware(['auth:sanctum']);
 
     Route::delete('/user/delete/{id}', [UserController::class, 'destroy']);
     Route::put('/user/update/{id}', [UserController::class, 'update']);
     Route::get('/user/{id}', [UserController::class, 'getPerUser']);
     Route::get('/user', [UserController::class, 'index']);
+
+    Route::get('/announcement', [AnnouncementController::class, 'index']);
+    Route::post('/announcement/create', [AnnouncementController::class, 'store']);
+    Route::put('/announcement/{id}', [AnnouncementController::class, 'update']);
+    Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy']);
+
 });
 
