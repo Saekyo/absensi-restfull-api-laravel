@@ -14,12 +14,21 @@ class AuthenticationController extends Controller
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->plainTextToken;
+            $role = $user->role;
+            
             $success['name'] =  $user->name;
             $success['email'] = $user->email;
             $success['password'] = $user->password;
 
+            if ($role = ('admin')) {
+                
+                $success['token'] =  $user->createToken('MyApp', ['admin'])->plainTextToken;
 
+            } else {
+                
+                 $success['token'] =  $user->createToken('MyApp', ['user'])->plainTextToken;
+            }
+            
             return response()->json([
                 'status' => 200,
                 'data' => $success
