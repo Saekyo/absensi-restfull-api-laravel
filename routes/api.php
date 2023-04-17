@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnnouncementController;
-use App\Http\Middleware\isLogin;
-use App\Http\Middleware\CekRole;
+use App\Http\Controllers\MediaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +37,15 @@ Route::group(['middleware' => 'auth:sanctum', 'abilities:admin'], function() {
         Route::post('/announcement/create', [AnnouncementController::class, 'store']);
         Route::put('/announcement/{id}', [AnnouncementController::class, 'update']);
         Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy']);
+        
+        Route::post('posts', [AuthenticationController::class, 'store']);                                                                                               
     });
 
 
+
 });
+// Route::middleware('isLogin')->group(function(){
+    Route::post('/media/post', [MediaController::class, 'store']);
+// });
+
 
