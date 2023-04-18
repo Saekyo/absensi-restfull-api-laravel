@@ -38,14 +38,15 @@ Route::group(['middleware' => 'auth:sanctum', 'abilities:admin'], function() {
         Route::put('/announcement/{id}', [AnnouncementController::class, 'update']);
         Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy']);
         
-        Route::post('posts', [AuthenticationController::class, 'store']);                                                                                               
+        Route::post('posts', [AuthenticationController::class, 'store']);          
+        Route::post('/media/post', [MediaController::class, 'store']);
+                                                                                         
     });
 
 
 
 });
 // Route::middleware('isLogin')->group(function(){
-    Route::post('/media/post', [MediaController::class, 'store']);
 // });
 
 
